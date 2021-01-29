@@ -244,9 +244,11 @@ function updateEmployeeRole() {
 }
 
 function fireAll() {
+    connection.query(`DELETE * FROM employee`);
 
+    appHome();
 }
 
 function exit() {
-
+    connection.end();
 }
