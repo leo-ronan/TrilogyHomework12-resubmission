@@ -8,6 +8,7 @@ require("console.table");
 require("asciiart-logo");
 
 const connection = require("./connection");
+const inquirer = require("inquirer");
 
 //Run app
 app();
@@ -112,14 +113,14 @@ async function displayAllEmployees() {
 
 async function displayEmployeesByDepartment() {
     function connect() {
-        const {departmentId} = prompt([
+        const {department_id} = prompt([
             {
-                name: "departmentId",
+                name: "department_id",
                 type: "input",
                 message: "Which department would you like to filter by?"
             }
         ])
-        return this.connection.query(`SELECT * FROM employee WHERE department.id = "${departmentId}"`)
+        return this.connection.query(`SELECT * FROM employee WHERE department.id = "${department_id}"`)
     }
     const res = await connect();
     console.log("\n");
@@ -130,14 +131,14 @@ async function displayEmployeesByDepartment() {
 
 async function displayEmployeesByRole() {
     function connect() {
-        const {roleId} = prompt([
+        const {role_id} = prompt([
             {
-                name: "roleId",
+                name: "role_id",
                 type: "input",
                 message: "Which role would you like to filter by?"
             }
         ])
-        return this.connection.query(`SELECT * FROM employee WHERE role.id = "${roleId}"`);
+        return this.connection.query(`SELECT * FROM employee WHERE role.id = "${role_id}"`);
     }
     const res = await connect();
     console.log("\n");
@@ -147,7 +148,35 @@ async function displayEmployeesByRole() {
 }
 
 function addEmployee() {
-    
+    inquirer.prompt([
+        {
+            name: "first_name",
+            type: "input",
+            message: "Enter new employee's first name"
+        },
+        {
+            name: "last_name",
+            type: "input",
+            message: "Enter new employee's last name"
+        },
+        {
+            name: "role_id",
+            type: "input",
+            message: "Enter new employee's role id"
+        },
+        {
+            name: "manager_id",
+            type: "input",
+            message: "Enter new employee's manager's id"
+        }
+    ]).then(function(res) {
+        connection.query(`
+            INSERT INTO EMPLOYEE (first_name, last_name, role_id, manager_id)
+            VALUES ("${res.first_name}", "${res.last_name}", "${res.role_id}", "${res.manager_id}") 
+        `);
+
+        appHome();
+    })
 }
 
 function addDepartment() {
