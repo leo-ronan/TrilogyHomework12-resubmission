@@ -65,23 +65,35 @@ async function appHome(){
             },
             {
                 name: "Update a department's information",
-                value: ""
+                value: "upd_department"
             },
             {
                 name: "Update a role's information",
-                value: ""
+                value: "upd_role"
             },
             {
-                name: "Purge entire database",
-                value: ""
+                name: "Fire everyone at once",
+                value: "questionable_decision"
             }, 
             {
                 name: "Exit",
-                value: ""
-            },
+                value: "exit"
+            }
         ]
-    }   
-    ]
-    )
+    }]);
+    //Run function associated with user's input
+    switch(input) {
+        case "dsp_all_employees": return placeholder();
+        case "dsp_employees_by_department": return placeholder();
+        case "dsp_employees_by_role": return placeholder();
+        case "add_employee": return placeholder();
+        case "add_department": return placeholder();
+        case "add_role": return placeholder();
+        case "upd_employee": return placeholder();
+        case "upd_department": return placeholder();
+        case "upd_role": return placeholder();
+        case "questionable_decision": return placeholder();
+        case "exit": return placeholder();
+    }
 }
 
