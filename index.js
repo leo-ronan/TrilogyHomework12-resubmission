@@ -37,31 +37,31 @@ async function appHome(){
         choices: [
             {
                 name: "Display all employees",
-                value: ""
+                value: "dsp_all_employees"
             },
             {
                 name: "Display all employees by department",
-                value: ""
+                value: "dsp_employees_by_department"
             },
             {
                 name: "Display all employees by role",
-                value: ""
+                value: "dsp_employees_by_role"
             },
             {
                 name: "Add a new employee",
-                value: ""
+                value: "add_employee"
             },
             {
                 name: "Add a new department",
-                value: ""
+                value: "add_department"
             },
             {
                 name: "Add a new role",
-                value: ""
+                value: "add_role"
             },
             {
                 name: "Update an employee's information",
-                value: ""
+                value: "upd_employee"
             },
             {
                 name: "Update a department's information",
