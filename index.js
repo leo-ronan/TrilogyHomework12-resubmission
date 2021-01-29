@@ -29,13 +29,56 @@ async function app() {
 
 
 async function appHome(){
-    //Set user's input when received
+    //Set user's input from input list when received
     let {const} = await prompt([{
         name: "input",
         type: "list",
         message: "Please select an action",
         choices: [
-            
+            {
+                name: "Display all employees",
+                value: ""
+            },
+            {
+                name: "Display all employees by department",
+                value: ""
+            },
+            {
+                name: "Display all employees by role",
+                value: ""
+            },
+            {
+                name: "Add a new employee",
+                value: ""
+            },
+            {
+                name: "Add a new department",
+                value: ""
+            },
+            {
+                name: "Add a new role",
+                value: ""
+            },
+            {
+                name: "Update an employee's information",
+                value: ""
+            },
+            {
+                name: "Update a department's information",
+                value: ""
+            },
+            {
+                name: "Update a role's information",
+                value: ""
+            },
+            {
+                name: "Purge entire database",
+                value: ""
+            }, 
+            {
+                name: "Exit",
+                value: ""
+            },
         ]
     }   
     ]
