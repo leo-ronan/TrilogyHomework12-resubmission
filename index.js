@@ -63,16 +63,8 @@ async function appHome(){
                 value: "add_role"
             },
             {
-                name: "Update an employee's information",
-                value: "upd_employee"
-            },
-            {
-                name: "Update a department's information",
-                value: "upd_department"
-            },
-            {
-                name: "Update a role's information",
-                value: "upd_role"
+                name: "Update an employee's role",
+                value: "upd_employee_role"
             },
             {
                 name: "Fire everyone at once",
@@ -92,9 +84,7 @@ async function appHome(){
         case "add_employee": return addEmployee();
         case "add_department": return addDepartment();
         case "add_role": return addRole();
-        case "upd_employee": return updateEmployee();
-        case "upd_department": return updateDepartment();
-        case "upd_role": return updateRole();
+        case "upd_employee_role": return updateEmployeeRole();
         case "questionable_decision": return fireAll();
         case "exit": return exit();
     }
@@ -171,32 +161,86 @@ function addEmployee() {
         }
     ]).then(function(res) {
         connection.query(`
-            INSERT INTO EMPLOYEE (first_name, last_name, role_id, manager_id)
+            INSERT INTO employee (first_name, last_name, role_id, manager_id) 
             VALUES ("${res.first_name}", "${res.last_name}", "${res.role_id}", "${res.manager_id}") 
         `);
 
         appHome();
-    })
+    });
 }
 
 function addDepartment() {
-    
+    inquirer.prompt([
+        {
+            name: "department_name",
+            type: "input",
+            message: "Enter new department name"
+        }
+    ]).then(function(res) {
+        connection.query(`
+            INSERT INTO department (department_name) 
+            VALUE ("${res.department_name}")
+        `);
+    });
+
+    appHome();
 }
 
 function addRole() {
-    
+    inquirer.prompt([
+        {
+            name: "role_name",
+            type: "input",
+            message: "Enter new role name"
+        },
+        {
+            name: "role_salary",
+            type: "input",
+            message: "Enter new role salary"
+        },
+        {
+            name: "role_department",
+            type: "input",
+            message: "Enter new role's department id"
+        }
+    ]).then(function(res) {
+        connection.query(`
+            INSERT INTO role (role_title, role_salary, role_department_id) 
+            VALUE ("${res.role_name}", "${res.role_salary}", "${res.role_department}")
+        `);
+
+        appHome();
+    });
+
+    appHome();    
 }
 
-function updateEmployee() {
-    
-}
+function updateEmployeeRole() {
+    inquirer.prompt([
+        {
+            name: "first_name",
+            type: "input",
+            message: "Enter employee's first name"
+        },
+        {
+            name: "last_name",
+            type: "input",
+            message: "Enter employee's last name"
+        },
+        {
+            name: "role_id",
+            type: "input",
+            message: "Enter new role id"
+        }
+    ]).then(function(res) {
+        connection.query(`
+            UPDATE employee SET role_id = "${role_id}" 
+            WHERE first_name = "${first_name}" 
+            AND last_name = "${last_name}"
+        `);
+    });
 
-function updateDepartment() {
-    
-}
-
-function updateRole() {
-    
+    appHome();
 }
 
 function fireAll() {
