@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: ""
+    database: "employees_DB"
 });
 //Establish connection to use promises on a connection query
 connection.connect();
