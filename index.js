@@ -7,6 +7,8 @@ require("console.table");
 //Will be used to render app name (Employee Manager) as ascii art to resemble the homework example gif
 require("asciiart-logo");
 
+const connection = require("./connection");
+
 //Run app
 app();
 
@@ -83,17 +85,95 @@ async function appHome(){
     }]);
     //Run function associated with user's input
     switch(input) {
-        case "dsp_all_employees": return placeholder();
-        case "dsp_employees_by_department": return placeholder();
-        case "dsp_employees_by_role": return placeholder();
-        case "add_employee": return placeholder();
-        case "add_department": return placeholder();
-        case "add_role": return placeholder();
-        case "upd_employee": return placeholder();
-        case "upd_department": return placeholder();
-        case "upd_role": return placeholder();
-        case "questionable_decision": return placeholder();
-        case "exit": return placeholder();
+        case "dsp_all_employees": return displayAllEmployees();
+        case "dsp_employees_by_department": return displayEmployeesByDepartment();
+        case "dsp_employees_by_role": return displayEmployeesByRole();
+        case "add_employee": return addEmployee();
+        case "add_department": return addDepartment();
+        case "add_role": return addRole();
+        case "upd_employee": return updateEmployee();
+        case "upd_department": return updateDepartment();
+        case "upd_role": return updateRole();
+        case "questionable_decision": return fireAll();
+        case "exit": return exit();
     }
 }
 
+async function displayAllEmployees() {
+    function connect() {
+        return this.connection.query("SELECT * FROM employee");
+    }
+    const res = await connect();
+    console.log("\n");
+    console.table(res);
+
+    appHome();
+}
+
+async function displayEmployeesByDepartment() {
+    function connect() {
+        const {departmentId} = prompt([
+            {
+                name: "departmentId",
+                type: "input",
+                message: "Which department would you like to filter by?"
+            }
+        ])
+        return this.connection.query(`SELECT * FROM employee WHERE department.id = "${departmentId}"`)
+    }
+    const res = await connect();
+    console.log("\n");
+    console.table(res);
+
+    appHome();
+}
+
+async function displayEmployeesByRole() {
+    function connect() {
+        const {roleId} = prompt([
+            {
+                name: "roleId",
+                type: "input",
+                message: "Which role would you like to filter by?"
+            }
+        ])
+        return this.connection.query(`SELECT * FROM employee WHERE role.id = "${roleId}"`);
+    }
+    const res = await connect();
+    console.log("\n");
+    console.table(res);
+
+    appHome();
+}
+
+function addEmployee() {
+    
+}
+
+function addDepartment() {
+    
+}
+
+function addRole() {
+    
+}
+
+function updateEmployee() {
+    
+}
+
+function updateDepartment() {
+    
+}
+
+function updateRole() {
+    
+}
+
+function fireAll() {
+
+}
+
+function exit() {
+
+}
